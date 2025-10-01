@@ -4,22 +4,36 @@
     <meta charset="UTF-8">
     <title>My Flask Site</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.rings.min.js"></script>
+
 </head>
 <body>
+
     <h1>Hello from Flask!</h1>
-    <button id="clickMe">Click me</button>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <picture> 
-        <img src="static\Dog.jpg" alt="Dog">
-    </picture>
-    <a href="https://www.cineby.app/tv/1434/15/6?play=true"> Steam</a>
-    <iframe> id=”player” type=”text/html” width=”640″ height=”390″ src="https://www.cineby.app/tv/1434/15/6?play=true" frameborder=”0″></iframe>
-    <a href="/about"> about</a>
-    <ul>
-        <li>
-        cookies  
-         milk 
-        </li>
-    </ul>
+    <form action="/submit" method="POST"> 
+    <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+  </form>
+
+
+<div id="background" style="width: 100vw; height: 100vh;"></div>
+
+<script>
+  VANTA.RINGS({
+    el: "#background",    // Target your div by ID or selector
+    color: 0x1e90ff,      // Customize colors
+    shininess: 50,
+    waveHeight: 20,
+    waveSpeed: 1
+  });
+</script>
+
+
+
+
 </body>
 </html>
