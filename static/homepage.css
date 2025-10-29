@@ -4,6 +4,16 @@ h1{
     font-size: 67px;
 }
 
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
 #homebutton {
     text-align: center;
+    animation: spin 3s infinite linear;
 }
