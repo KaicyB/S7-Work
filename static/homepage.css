@@ -1,8 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap'); 
+
+@font-face {
+        font-family: 'breadFont-webfont';
+        src: url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap') !important;
+    }
+
+
+
 h1{
     text-align: center;
-    font-style: bold;
-    font-size: 67px;
+    color: wheat !important;
+    font-size: 70px !important;
+    font-family: breadFont !important;
 }
+
 
 @keyframes spin {
     from{
@@ -13,7 +24,13 @@ h1{
     }
 }
 
+
 #homebutton {
     text-align: center;
     animation: spin 3s infinite linear;
+}
+
+body{
+    background-image: url(bread.gif);
+    background-size: contain;
 }
