@@ -8,10 +8,11 @@
 
 
 h1{
+
+    font: 'breadFont-webfont' !important;
     text-align: center;
     color: wheat !important;
     font-size: 70px !important;
-    font-family: breadFont !important;
 }
 
 
@@ -28,9 +29,12 @@ h1{
 #homebutton {
     text-align: center;
     animation: spin 3s infinite linear;
+    border: none;
+    background-color: transparent;
+    size: large;
 }
 
 body{
     background-image: url(bread.gif);
-    background-size: contain;
+    background-size: cover;
 }
