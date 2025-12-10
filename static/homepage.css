@@ -42,6 +42,7 @@ h1{
 
 .bread{
     block-size: 50px;
+    position: absolute;
     animation: fall linear;
     
 }

@@ -13,4 +13,4 @@ function createBread() {
 }
 
 
-setInterval(createBread, 250)
+setInterval(createBread, 500)

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap'); 
+
+@font-face {
+        font-family: 'breadFont-webfont';
+        src: url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap') !important;
+    }
+
+
+h1{
+
+    font: 'breadFont-webfont' !important;
+    text-align: center;
+    color: wheat !important;
+    font-size: 70px !important;
+}
+
+
+
+body{
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+}
+
+.vlseparator {
+    border-right-style: solid;
+    border-width: 60px;
+    display: flex;
+    gap: 20px;
+    color: black;
+    height: 100px;
+}

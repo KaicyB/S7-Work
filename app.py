@@ -7,9 +7,6 @@ def start():
     return render_template("index.html")
 
 
-@app.route("/index")
-def home():
-    return render_template("index.html")
 
 @app.route("/home")
 def homepage():
@@ -21,16 +18,6 @@ def homepage():
 def about():
 
     return render_template("about.html")
-
-
-@app.route("/submit", methods=["POST"])
-def submit():
-    
-    username = request.form["fname"]
-    
-    message = request.form["lname"]
-    
-    return f"Thanks {username}, your message was: {message}"
 
 
 if __name__ == "__main__":
