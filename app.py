@@ -6,6 +6,8 @@ import pymysql
 app = Flask(__name__)
 
 app.secret_key = 'Losdeserveslife' 
+bcrypt = Bcrypt(app)
+
 
 conn = pymysql.connect(
   host='localhost', 
@@ -53,8 +55,12 @@ def insertUserGET():
 
 @app.route("/")
 def start():
-    return render_template("index.html")
+    return render_template("login.html")
 
+
+@app.route("/game")
+def game():
+    return render_template("index.html")
 
 
 @app.route("/home")
@@ -69,6 +75,19 @@ def about():
     return render_template("about.html")
 
 
+@app.route("/login")
+def login():
+
+    return render_template("login.html")
+
+
+@app.route("/registerpage")
+def registerpage():
+
+    return render_template("registerpage.html")
+
+
+
 @login_manager.user_loader
 def user_loader(id):
     user = User()
@@ -79,6 +98,29 @@ def user_loader(id):
         user.id = result['id']
         return user
     return None  # User not found
+
+@app.route("/api/TODO", methods=['POST'])
+def insertTODO():
+    data = request.form
+    if not data:
+        return jsonify({"status" : "error", "message": "invalid payload"})
+    
+    arg1 = data.get('Email1')     # change and add more as needed. 
+    arg2 = data.get('Password1')
+    
+    hashed_password = bcrypt.generate_password_hash(arg2).decode('utf-8') 
+
+
+    try:
+        instance = conn.cursor()
+        instance.execute('INSERT INTO table_name (column_names) VALUES (%s, %s)', 
+                        (arg1, hashed_password))
+        conn.commit()
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
+    return jsonify({"status": "success", "message": "Insert successful!"})
+
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
