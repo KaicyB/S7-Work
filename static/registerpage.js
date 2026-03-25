@@ -1,12 +1,12 @@
-document.getElementById('login')?.addEventListener('submit', (event) => {
+document.getElementById('mform')?.addEventListener('submit', (event) => {
         event.preventDefault(); // this prevents the standard action that is taken when certain things happen. 
                                 // Forms automatically send stuff to the server when submitted, and redirect to a new page.
                                 // We don't want that.
 
-        let form = document.getElementById('login');
+        let form = document.getElementById('mform');
         let formData = new FormData(form);                   // find the form, and transform the data inside of it.
 
-        fetch('/loginform', {
+        fetch('/mForm', {
             method: 'POST',
             body: formData,
         }) 

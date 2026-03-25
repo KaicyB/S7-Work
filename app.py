@@ -55,7 +55,7 @@ def insertUserGET():
 
 @app.route("/")
 def start():
-    return render_template("login.html")
+    return render_template("MarathonForm.html")
 
 
 @app.route("/game")
@@ -99,28 +99,62 @@ def user_loader(id):
         return user
     return None  # User not found
 
-@app.route("/api/TODO", methods=['POST'])
+@app.route("/mForm", methods=['POST'])
 def insertTODO():
     data = request.form
     if not data:
         return jsonify({"status" : "error", "message": "invalid payload"})
     
-    arg1 = data.get('Email1')     # change and add more as needed. 
-    arg2 = data.get('Password1')
-    
-    hashed_password = bcrypt.generate_password_hash(arg2).decode('utf-8') 
+    arg1 = data.get('fName')     # change and add more as needed. 
+    arg2 = data.get('lName')
+    arg3 = data.get('marathonLength')
+    arg4 = data.get('email')
+    arg5 = data.get('password')
+    arg6 = data.get('rAge')
+
+    hashed_password = bcrypt.generate_password_hash(arg5).decode('utf-8') 
 
 
     try:
         instance = conn.cursor()
-        instance.execute('INSERT INTO table_name (column_names) VALUES (%s, %s)', 
-                        (arg1, hashed_password))
+        instance.execute('INSERT INTO users (last_name, first_name, email, password_hash, marathon_length, race_age) VALUES (%s, %s, %s, %s, %s, %s)', 
+                        (arg2, arg1, arg4, hashed_password, arg3, arg6))
         conn.commit()
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
     return jsonify({"status": "success", "message": "Insert successful!"})
 
+
+
+def authenticate(email, password): 
+    instance = conn.cursor() 
+    instance.execute("select id, password_hash FROM users WHERE email = %s", (email,)) 
+    conn.commit() 
+    if (instance.rowcount == 0): 
+        return None 
+    result = instance.fetchone() 
+    if bcrypt.check_password_hash(result['password_hash'], password): 
+        return result['id'] 
+    else: 
+        return None 
+
+@app.route("/loginform", methods=['POST'])
+def login_user():
+    data = request.form
+    if not data:
+        return jsonify({"status" : "error", "message": "invalid payload"})
     
+    arg1 = data.get('email')
+    arg2 = data.get('password')
+
+    auth = authenticate(arg1, arg2)
+    if auth == None:
+        return jsonify({"status": "error", "message": str(e)})
+    else:
+        user = User() 
+        user.id = auth
+        flask_login.login_user(user) 
+        return jsonify({"status": "success", "message": "Insert successful!"})
 
 if __name__ == "__main__":
     app.run(debug=True)
